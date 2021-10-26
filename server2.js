@@ -12,14 +12,7 @@ var schema = buildSchema(`
     },
     type Mutation {
         updateCourseTopic(id: Int!, topic: String!): Course
-        addCourse(
-            id: Int!,
-            title: String!,
-            author: String!,
-            description: String!,
-            topic: String!,
-            url: String!
-            ): Course
+    
     }
     type Course {
         id: Int
@@ -74,13 +67,10 @@ var getCourses = function(args) {
     }
 }
 
-var getCoursesByTitle = function(args) {
-    if (args.title) {
-        var title = args.title;
-        return coursesData.filter(course => course.title.includes(title));
-    } else {
-        return coursesData;
-    }
+var getCoursesByTitle = function({title}) {
+    return coursesData.filter((course) => {
+        course.title.toLowerCase().includes(title.toLowerCase());
+    });
 }
 
 var updateCourseTopic = function({id, topic}) {
