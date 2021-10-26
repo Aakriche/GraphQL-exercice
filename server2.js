@@ -77,7 +77,7 @@ var getCourses = function(args) {
 var getCoursesByTitle = function(args) {
     if (args.title) {
         var title = args.title;
-        return coursesData.filter(course => course.title === title);
+        return coursesData.filter(course => course.title.includes(title));
     } else {
         return coursesData;
     }
